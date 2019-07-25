@@ -1,6 +1,0 @@
-tasks:
-  task1:
-    type: "test-runner"
-    interval: 1000
-    props:
-      key: "hahhaha"

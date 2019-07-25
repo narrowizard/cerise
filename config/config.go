@@ -9,7 +9,7 @@ import (
 func LoadConfig() (map[string]models.Task, error) {
 	var v = viper.New()
 	v.SetConfigName("config")
-	v.AddConfigPath(".")
+	v.AddConfigPath("./config")
 	var err = v.ReadInConfig()
 	if err != nil {
 		return nil, err

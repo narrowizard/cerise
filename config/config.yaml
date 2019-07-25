@@ -1,0 +1,11 @@
+tasks:
+  task1:
+    type: "api-trigger"
+    interval: 1000
+    stopOnError: true
+    props:
+      protocol: "https:"
+      host: "api.xxxx.com"
+      pathname: "/whar"
+      params: ""
+      method: "GET"
