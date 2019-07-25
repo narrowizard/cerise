@@ -40,15 +40,18 @@ func (rc *RunnerContainer) RunTask(name string, t models.Task) error {
 	// start a ticker
 	var ticker = time.NewTicker(time.Duration(t.Interval) * time.Millisecond)
 	var stop chan bool
+	fmt.Println("task " + name + " started")
 	go func() {
 		for range ticker.C {
 			select {
 			case <-stop:
-				fmt.Println("task " + name + " stopped")
 				ticker.Stop()
 			default:
 				// run task
-				runner.Run(t.Props)
+				var err = runner.Run(t.Props)
+				if err != nil && t.StopOnError {
+					rc.StopTask(name)
+				}
 			}
 		}
 	}()
@@ -58,6 +61,7 @@ func (rc *RunnerContainer) RunTask(name string, t models.Task) error {
 
 // StopTask manually stop a task
 func (rc *RunnerContainer) StopTask(name string) error {
+	fmt.Println("task " + name + " stopped")
 	var stop, ok = rc.tasks[name]
 	if !ok {
 		return errors.New("task not found")

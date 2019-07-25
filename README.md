@@ -11,6 +11,8 @@ tasks:
     type: "test-runner"
     # tick interval
     interval: 1000
+    # if stop ticker when runner cause error
+    stopOnError: true
     # props for spec task runner
     props:
       key: "hahhaha"

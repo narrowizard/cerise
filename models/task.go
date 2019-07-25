@@ -2,9 +2,10 @@ package models
 
 // Task represent a auto-invoke task
 type Task struct {
-	Type     string                 // api-trigger
-	Interval int64                  // ms
-	Props    map[string]interface{} // props
+	Type        string // api-trigger
+	Interval    int64  // ms
+	StopOnError bool
+	Props       map[string]interface{} // props
 }
 
 // APITriggerProps api trigger task props model
