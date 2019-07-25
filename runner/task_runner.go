@@ -42,6 +42,11 @@ func (rc *RunnerContainer) RunTask(name string, t models.Task) error {
 	var stop chan bool
 	fmt.Println("task " + name + " started")
 	go func() {
+		// manually tick at start
+		var err = runner.Run(t.Props)
+		if err != nil && t.StopOnError {
+			rc.StopTask(name)
+		}
 		for range ticker.C {
 			select {
 			case <-stop:
@@ -55,6 +60,7 @@ func (rc *RunnerContainer) RunTask(name string, t models.Task) error {
 			}
 		}
 	}()
+
 	rc.tasks[name] = stop
 	return nil
 }
