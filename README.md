@@ -1,4 +1,5 @@
 # Cerise
+[![Build Status](https://travis-ci.org/narrowizard/cerise.svg?branch=master)](https://travis-ci.org/narrowizard/cerise)  
 Cerise is a task runner based on time.Ticker. extensible and flexible.
 
 ## get started
