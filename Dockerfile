@@ -4,7 +4,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -v -o cerise .
 
 FROM alpine:latest
-VOLUME ["/root/config"]
+VOLUME ["/root/config", "/root/log"]
 WORKDIR /root/
 EXPOSE 80
 
