@@ -6,7 +6,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -v -o cerise .
 FROM alpine:latest
 VOLUME ["/root/config", "/root/log"]
 WORKDIR /root/
-EXPOSE 80
 
 RUN rm -rf /etc/apk/repositories && \
     echo "http://mirrors.aliyun.com/alpine/v3.5/community/" >> /etc/apk/repositories && \

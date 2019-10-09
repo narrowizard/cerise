@@ -10,6 +10,8 @@ tasks:
   task1:
     # task type, specify to task runner
     type: "test-runner"
+    # specify first task starts time
+    startAt: "2019-10-09 16:00:00"
     # tick interval
     interval: 1000
     # if stop ticker when runner cause error

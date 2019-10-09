@@ -3,9 +3,10 @@ tasks:
     type: "api-trigger"
     interval: 1000
     stopOnError: true
+    startAt: "2019-10-09 15:57:00"
     props:
-      protocol: "https:"
-      host: "api.xxxx.com"
-      pathname: "/whar"
+      protocol: "http:"
+      host: "localhost:8080"
+      pathname: "/apis/v1/material"
       params: ""
       method: "GET"

@@ -8,6 +8,8 @@ import (
 	"github.com/narrowizard/cerise/models"
 )
 
+var timeLayout = "2006-01-02 15:04:05"
+
 // RunnerContainer global runner and task container
 type RunnerContainer struct {
 	runners map[string]models.Runner
@@ -37,16 +39,30 @@ func (rc *RunnerContainer) RunTask(name string, t models.Task) error {
 	if ok {
 		return errors.New("task already exists, task name conflict")
 	}
-	// start a ticker
-	var ticker = time.NewTicker(time.Duration(t.Interval) * time.Millisecond)
+	var now = time.Now()
+	// resolve start at
+	var startAt, err = time.ParseInLocation(timeLayout, t.StartAt, time.Local)
+	if err != nil {
+		fmt.Println(err)
+		startAt = now
+	}
+	var timeout time.Duration
+	if startAt.After(now) {
+		timeout = startAt.Sub(now)
+	}
+	var timer = time.NewTimer(timeout)
 	var stop chan bool
-	fmt.Println("task " + name + " started")
+	fmt.Printf("task %s will start after %f s\n", name, timeout.Seconds())
 	go func() {
+		<-timer.C
+		fmt.Printf("task %s started\n", name)
 		// manually tick at start
 		var err = runner.Run(t.Props)
 		if err != nil && t.StopOnError {
 			rc.StopTask(name)
 		}
+		// start a ticker
+		var ticker = time.NewTicker(time.Duration(t.Interval) * time.Millisecond)
 		for range ticker.C {
 			select {
 			case <-stop:
