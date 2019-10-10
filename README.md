@@ -21,6 +21,23 @@ tasks:
       key: "hahhaha"
 ```
 
+## docker
+```yaml
+# docker-compose.yml
+version: "3"
+services:
+  cerise:
+    image: "cerise"
+    volumes:
+     # volume your config.yaml
+     - /home/data/cerise/config:/root/config
+     - /home/data/cerise/log:/root/log
+    environment:
+     # set timezone
+     - TIMEZONE=Africa/Abidjan
+```
+
+
 ## add extension
 1. implement your own task runner.  
 1. register your task runner via `RunnerContainer#Register`

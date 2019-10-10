@@ -43,7 +43,7 @@ func (rc *RunnerContainer) RunTask(name string, t models.Task) error {
 	// resolve start at
 	var startAt, err = time.ParseInLocation(timeLayout, t.StartAt, time.Local)
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 		startAt = now
 	}
 	var timeout time.Duration
