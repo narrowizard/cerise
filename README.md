@@ -31,7 +31,6 @@ services:
     volumes:
      # volume your config.yaml
      - /home/data/cerise/config:/root/config
-     - /home/data/cerise/log:/root/log
     environment:
      # set timezone
      - TIMEZONE=Africa/Abidjan
